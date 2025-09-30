@@ -3,128 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>udanaindrajith</title>
+    <title>Udana Indrajith | Portfolio</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
+            --accent-color: #e74c3c;
             --light-color: #ecf0f1;
+            --dark-color: #1a252f;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
         }
 
+        /* Navbar Styles */
         .navbar {
-            background-color: var(--primary-color);
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: var(--transition);
+        }
+
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
         .hero-section {
-            background-color: var(--light-color);
-            padding: 100px 0;
-            text-align: center;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.8));
+            padding: 150px 0 100px;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .profile-img {
-            width: 200px;
-            height: 200px;
+        .network-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Network-themed background elements */
+        .network-node {
+            position: absolute;
             border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            cursor: pointer;
+            background: rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            animation: pulse 4s infinite;
+            z-index: 1;
         }
-        .popup-image {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
 
-.modal-content {
-    position: relative;
-    background-color: white;
-    margin: 5% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 800px;
-    border-radius: 5px;
-    animation: modalOpen 0.3s ease;
-    overflow-y: auto;
-    max-height: 90vh;
-}
+        .network-connection {
+            position: absolute;
+            background: rgba(52, 152, 219, 0.3);
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+            perspective: 1000px;
+            z-index: 3;
+        }
+
+        /* Modern hexagon design for profile picture */
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            z-index: 4;
+            /* Add modern art effect */
+            filter: saturate(1.2) contrast(1.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            border: 2px solid var(--secondary-color);
+            animation: rotate 20s linear infinite;
+            z-index: 3;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: var(--secondary-color);
+            /* Add glow effect on hover */
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--light-color);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            animation: fadeInUp 1s ease 0.6s both;
+            margin: 10px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.6);
+            color: white;
+        }
+
+        /* Sections */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--primary-color);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            margin-bottom: 30px;
+            border: none;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .education-card, .experience-card, .project-card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-         
-        .education-card {
             position: relative;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-       }
-       .education-info {
-    flex: 1;
-}
-
-.university-image {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 2%;
-    transition: transform 0.3s ease;
-}
-
-.university-image:hover {
-    transform: scale(1.05);
-}
-
-.university-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.university-link:hover {
-    text-decoration: none;
-}
-        .education-card:hover, .experience-card:hover, .project-card:hover {
-            transform: translateY(-5px);
+            overflow: hidden;
         }
 
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+        .education-card::before, .experience-card::before, .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+            transition: var(--transition);
+        }
+
+        .card:hover::before {
+            height: 100%;
+        }
+
+        .education-info {
+            padding: 25px;
+        }
+
+        .university-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .university-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Company Logo Styles */
+        .company-logo {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .company-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .project-card-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-card-image img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+        }
+
+        .contact-title {
+            color: white !important;
+        }
+
+        .contact-title::after {
+            background: linear-gradient(to right, var(--light-color), var(--secondary-color)) !important;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .linkedin { background: #0077B5; }
+        .github { background: #333; }
+        .twitter { background: #1DA1F2; }
+        .instagram { background: #E4405F; }
+
+        .contact-form .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            color: white;
+        }
+
+        .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         /* Modal Styles */
@@ -135,114 +414,166 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.8);
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             position: relative;
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 5px;
-            animation: modalOpen 0.3s ease;
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            animation: modalOpen 0.5s ease;
+            overflow-y: auto;
+            max-height: 90vh;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
         .close-btn {
             position: absolute;
             right: 20px;
-            top: 10px;
-            font-size: 24px;
+            top: 20px;
+            font-size: 28px;
             cursor: pointer;
             color: #666;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background: #f1f1f1;
+            color: var(--accent-color);
+        }
+
+        .popup-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            70% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes modalOpen {
-            from {transform: scale(0.7); opacity: 0;}
-            to {transform: scale(1); opacity: 1;}
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
-        /* Add these new styles to your existing CSS */
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 30px 0;
-}
 
-.social-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(249, 245, 245);
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
 
-.social-icon:hover {
-    transform: translateY(-5px);
-}
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-.linkedin {
-    background: #0077B5;
-}
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 30px 0;
+        }
 
-.github {
-    background: #333;
-}
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
 
-.twitter {
-    background: #1DA1F2;
-}
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.instagram {
-    background: #E4405F;
-}
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.contact-info {
-    text-align: center;
-    margin-bottom: 30px;
-}
+        .scroll-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
 
-.contact-form .form-control {
-    margin-bottom: 1rem;
-}
+        /* Skill tags */
+        .skill-tag {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+            transition: var(--transition);
+        }
 
-.success-message {
-    display: none;
-    color: green;
-    text-align: center;
-    margin: 10px 0;
-}
-
-.error-message {
-    display: none;
-    color: red;
-    text-align: center;
-    margin: 10px 0;
-}
-
-.project-card-image {
-    position: relative;
-    width: 100%;
-    height: 200px; /* Adjust height as needed */
-    overflow: hidden;
-}
-
-.project-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the container */
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-card-image img {
-    transform: scale(1.1); /* Zoom effect on hover */
-}
+        .skill-tag:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -277,91 +608,156 @@
 
     <!-- Home Section -->
     <section id="home" class="hero-section">
-        <div class="container">
-            <img src="images\WhatsApp Image 2022-02-27 at 4.10.10 PM (1).jpg" alt="Profile Picture" class="profile-img" onclick="showBioPopup()">
-            <h1 class="display-4">Udana Indrajith</h1>
-            <p class="lead">Web Developer & IT Technician</p>
-            <div class="about-me mt-4">
-                <p>Dedicated and detail-oriented IT Technician with 1+ years of experience in desktop servicing, network
-                    installation, and IT infrastructure support. Proven expertise in troubleshooting hardware, software, and
-                    network issues, as well as maintaining CCTV systems, server environments and programming. Adept at
-                    providing technical support, ensuring data security, and optimizing IT systems for seamless operations.
-                    </p>
+        <div class="network-background"></div>
+        <div class="container text-center hero-content">
+            <div class="profile-container" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="images/WhatsApp Image 2022-02-27 at 4.10.10 PM (1).jpg" alt="Profile Picture" class="profile-img" onclick="showBioPopup()">
+            </div>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-duration="1000">Udana Indrajith</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">IT Technical Support Engineer</p>
+            <p class="hero-description" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                Currently working as IT Technical Support Engineer at StarGate Building and Solutions in Dubai. 
+                Experienced IT professional with expertise in desktop servicing, network installation, and IT infrastructure support. 
+                Proven expertise in troubleshooting hardware, software, and network issues, as well as maintaining CCTV systems, 
+                server environments and programming.
+            </p>
+            <div class="mt-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <a href="#contact" class="btn btn-custom">Get In Touch</a>
+                <!-- CV Download Button -->
+                <a href="images/IT Technical Support Resume.pdf" class="btn btn-custom" download>Download CV</a>
             </div>
         </div>
     </section>
 
     <!-- Education Section -->
     <section id="education" class="section">
-    <div class="container">
-        <h2 class="section-title">Education</h2>
-        <div class="education-card">
-            <div class="education-info" onclick="showEducationPopupB('Bachelor of Science in Information Technology')">
-                <h4>Bachelor of Science in Information Technology
-                </h4>
-                <p>SIBA CAMPUS</p>
-                <p>2022 - 2025</p>
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Education</h2>
             </div>
-            <a href="https://siba.edu.lk" target="_blank" class="university-link">
-                <img src="images\siba.png" alt="" class="university-image">
-            </a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="education-card">
-            <div class="education-info" onclick="showEducationPopupD('Diploma in Information Technology')">
-                <h4>Diploma in Information Technology
-                </h4>
-                <p>SIBA CAMPUS</p>
-                <p>2021 - 2022</p>
+            
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card education-card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <a href="https://siba.edu.lk" target="_blank" class="university-link">
+                                    <img src="images/siba.png" alt="SIBA CAMPUS" class="university-image">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="education-info" onclick="showEducationPopupB('Bachelor of Science in Information Technology')">
+                                    <h4>Bachelor of Science in Information Technology</h4>
+                                    <p>SIBA CAMPUS</p>
+                                    <p>2022 - 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="card education-card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <a href="https://siba.edu.lk" target="_blank" class="university-link">
+                                    <img src="images/siba.png" alt="SIBA CAMPUS" class="university-image">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="education-info" onclick="showEducationPopupD('Diploma in Information Technology')">
+                                    <h4>Diploma in Information Technology</h4>
+                                    <p>SIBA CAMPUS</p>
+                                    <p>2021 - 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="card education-card">
+                        <div class="education-info" onclick="showEducationPopupT('Diploma in Tamil Language')">
+                            <h4>Diploma in Tamil Language</h4>
+                            <p>Higher Educational Institute Kobeigane</p>
+                            <p>2018</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                    <div class="card education-card">
+                        <div class="education-info" onclick="showEducationPopupE('Diploma in English Language')">
+                            <h4>Diploma in English Language</h4>
+                            <p>Rapid Way English Collage</p>
+                            <p>2020</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="https://siba.edu.lk" target="_blank" class="university-link">
-                <img src="images\siba.png" alt="" class="university-image">
-            </a>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="education-card">
-            <div class="education-info" onclick="showEducationPopupT('Diploma in Tamil Language')">
-                <h4>Diploma in Tamil Language
-                </h4>
-                <p></p>
-                <p>2018</p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="education-card">
-            <div class="education-info" onclick="showEducationPopupE('Diploma in English Language')">
-                <h4>Diploma in English Language
-                </h4>
-                <p>Rapid Way English Collage</p>
-                <p>2020</p>
-            </div>
-        </div>
-    </div>
-
-</section>
+    </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section">
+    <section id="experience" class="section" style="background-color: #f0f4f8;">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-card" onclick="showExperiencePopuptech('IT Technician')">
-                <h4>IT Technician</h4>
-                <p>PT.SASL & SONS INDONESIA.</p>
-                <p>2023-2025</p>
+            <div class="section-title" data-aos="fade-up">
+                <h2>Work Experience</h2>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="experience-card" onclick="showExperiencePopupapp('Application Developer')">
-                <h4>Application Developer</h4>
-                <p>S.A. SILVA & SONS LANKA (PVT) LTD.
-                </p>
-                <p>2023 </p>
+            
+            <div class="row">
+                <!-- Current Position -->
+                <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card experience-card">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                                <img src="images/pt_sasl_logo.png" alt="StarGate Building and Solutions" class="company-logo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="education-info" onclick="showExperiencePopupCurrent('IT Technical Support Engineer')">
+                                    <h4>IT Technical Support Engineer</h4>
+                                    <p>StarGate Building and Solutions</p>
+                                    <p>Dubai, UAE</p>
+                                    <p>July 2025 - Present</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="card experience-card">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                                <img src="images/pt_sasl_logo.png" alt="PT.SASL & SONS INDONESIA" class="company-logo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="education-info" onclick="showExperiencePopuptech('IT Technician')">
+                                    <h4>IT Technician</h4>
+                                    <p>PT.SASL & SONS INDONESIA</p>
+                                    <p>2023-2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="card experience-card">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                                <img src="images/sa_silva_logo.png" alt="S.A. SILVA & SONS LANKA (PVT) LTD" class="company-logo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="education-info" onclick="showExperiencePopupapp('Application Developer')">
+                                    <h4>Application Developer</h4>
+                                    <p>S.A. SILVA & SONS LANKA (PVT) LTD</p>
+                                    <p>2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -369,92 +765,116 @@
     <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
+            <div class="section-title" data-aos="fade-up">
+                <h2>Projects</h2>
+            </div>
+            
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="project-card-image">
-                        <img src="images/oficer.jpg" alt="Starlink Connection"> </div>
-                    <div class="project-card" onclick="showProjectPopupPHP('Project')">
-                        <h4>Sales officer bill System</h4>
-                        
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="project-card-image">
-                        <img src="images/nas.png" alt=""> </div>
-                    <div class="project-card" onclick="showProjectPopupcctv('Project')">
-                        <h4>32-Channel CCTV Surveillance System with NAS Storage</h4>
-                        
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="project-card-image">
-                        <img src="images/starlink2.png" alt=""> </div>
-                    <div class="project-card" onclick="showProjectPopupconect('Project')">
-                        <h4>Starlink Connection</h4>
-                        
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card project-card">
+                        <div class="project-card-image">
+                            <img src="images/oficer.jpg" alt="Starlink Connection">
+                        </div>
+                        <div class="education-info" onclick="showProjectPopupPHP('Sales officer bill System')">
+                            <h4>Sales officer bill System</h4>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Add more project cards as needed -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="card project-card">
+                        <div class="project-card-image">
+                            <img src="images/nas.png" alt="32-Channel CCTV Surveillance System">
+                        </div>
+                        <div class="education-info" onclick="showProjectPopupcctv('32-Channel CCTV Surveillance System with NAS Storage')">
+                            <h4>32-Channel CCTV Surveillance System with NAS Storage</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <div class="card project-card">
+                        <div class="project-card-image">
+                            <img src="images/starlink2.png" alt="Starlink Connection">
+                        </div>
+                        <div class="education-info" onclick="showProjectPopupconect('Starlink Connection')">
+                            <h4>Starlink Connection</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-<section id="contact" class="section">
-    <div class="contact-info">
-        <h2 class="section-title">Contact Me</h2>
-        <p>Phone:077-3690663  / 078-2420188
-            <br>
-            <a href="mailto:udanaindrajith2@gmail.com">
-                Send Email</a>
-        </p>
-        
-        <!-- Contact Info -->
-        <div class="contact-info">
-            <h4>Let's Connect!</h4>
-            <p>Feel free to reach out through social media or send me an email</p>
-        </div>
-
-        <!-- Social Media Icons -->
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/in/udana-indrajith" target="_blank" class="social-icon linkedin">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/udanaindrajith" target="_blank" class="social-icon github">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://twitter.com/your-handle" target="_blank" class="social-icon twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://instagram.com/your-handle" target="_blank" class="social-icon instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-
-        <!-- Contact Form -->
-        <form class="contact-form" id="contactForm">
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 class="contact-title">Contact Me</h2>
+            </div>
+            
             <div class="row">
-                <div class="col-md-6">
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                <div class="col-lg-4 text-center" data-aos="fade-up" data-aos-duration="1000">
+                    <h4>Let's Connect!</h4>
+                    <p>Feel free to reach out through social media or send me an email</p>
+                    
+                    <div class="contact-info mt-4">
+                        <p><i class="fas fa-phone me-2"></i> 077-3690663 / 078-2420188</p>
+                        <p><i class="fas fa-envelope me-2"></i> <a href="mailto:udanaindrajith2@gmail.com" class="text-white">udanaindrajith2@gmail.com</a></p>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <input type="email" class="form-control" id="email" placeholder="Enter your E-mail" required>
+                
+                <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <form class="contact-form" id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" id="email" placeholder="Enter your E-mail" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <div id="successMessage" class="alert alert-success text-center d-none">Message sent successfully!</div>
+                        <div id="errorMessage" class="alert alert-danger text-center d-none">Error sending message. Please try again.</div>
+                        <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                    </form>
                 </div>
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+            
+            <div class="social-icons" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <a href="https://www.linkedin.com/in/udana-indrajith" target="_blank" class="social-icon linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/udanaindrajith" target="_blank" class="social-icon github">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/your-handle" target="_blank" class="social-icon twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/your-handle" target="_blank" class="social-icon instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
             </div>
-            <div class="mb-3">
-                <textarea class="form-control" id="message" rows="5" placeholder="Your Message" required></textarea>
-            </div>
-            <div id="successMessage" class="success-message">Message sent successfully!</div>
-            <div id="errorMessage" class="error-message">Error sending message. Please try again.</div>
-            <button type="submit" class="btn btn-primary w-100">Send Message</button>
-        </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Udana Indrajith. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
     </div>
-</section>
 
     <!-- Custom Modal -->
     <div id="customModal" class="custom-modal">
@@ -466,24 +886,118 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    
-
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <!-- Custom JavaScript -->
     <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Create network-themed background
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('.hero-section');
+            const networkBackground = document.querySelector('.network-background');
+            
+            // Create network nodes
+            for (let i = 0; i < 15; i++) {
+                const node = document.createElement('div');
+                node.classList.add('network-node');
+                
+                // Random position and size
+                const size = Math.random() * 20 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                node.style.width = `${size}px`;
+                node.style.height = `${size}px`;
+                node.style.left = `${posX}%`;
+                node.style.top = `${posY}%`;
+                node.style.animationDelay = `${delay}s`;
+                
+                networkBackground.appendChild(node);
+            }
+            
+            // Create network connections
+            const nodes = document.querySelectorAll('.network-node');
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.7) { // 30% chance to create connection
+                        const connection = document.createElement('div');
+                        connection.classList.add('network-connection');
+                        
+                        const node1 = nodes[i];
+                        const node2 = nodes[j];
+                        
+                        const rect1 = node1.getBoundingClientRect();
+                        const rect2 = node2.getBoundingClientRect();
+                        
+                        const x1 = parseFloat(node1.style.left);
+                        const y1 = parseFloat(node1.style.top);
+                        const x2 = parseFloat(node2.style.left);
+                        const y2 = parseFloat(node2.style.top);
+                        
+                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                        
+                        connection.style.width = `${length}%`;
+                        connection.style.height = '1px';
+                        connection.style.left = `${x1}%`;
+                        connection.style.top = `${y1}%`;
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        
+                        networkBackground.appendChild(connection);
+                    }
+                }
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Scroll to top button
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        // Scroll to top functionality
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
         // Modal functionality
         function showModal(content) {
             document.getElementById('modalContent').innerHTML = content;
             document.getElementById('customModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('customModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Close modal when clicking outside
         window.onclick = function(event) {
-            if (event.target == document.getElementById('customModal')) {
+            const modal = document.getElementById('customModal');
+            if (event.target == modal) {
                 closeModal();
             }
         }
@@ -491,27 +1005,45 @@
         // Popup content functions
         function showBioPopup() {
             const content = `
-                <h4>Skills:</h4>
+                <h3 class="text-center mb-4">My Skills</h3>
+                <div class="text-center mb-4">
+                    <span class="skill-tag">IT Technical Support</span>
+                    <span class="skill-tag">Network Infrastructure</span>
+                    <span class="skill-tag">System Administration</span>
+                    <span class="skill-tag">Cloud Solutions</span>
+                    <span class="skill-tag">Hardware/Software Troubleshooting</span>
+                    <span class="skill-tag">Security Systems</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Bootstrap</span>
+                    <span class="skill-tag">Responsive Design</span>
+                    <span class="skill-tag">AJAX</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Windows</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">MacOS</span>
+                    <span class="skill-tag">Database Management</span>
+                    <span class="skill-tag">Virtualization</span>
+                </div>
+                <h4>Technical Skills:</h4>
                 <ul> 
-                    <i>Hardware/Software Troubleshooting: PCs, servers,
-printers, CCTV systems.</i>
-                    <li>IT Support: Helpdesk, remote assistance, and
-Networking: LAN/WAN installation, cabling, Wi-Fi
-configuration, and troubleshooting.</li>
-                    <li>Programming: HTML, CSS, JavaScript, Python,</li>
-<i>Tools: Cable tester, crimping tools, multimeter, and
-diagnostic software.</i>
-                    <li>Operating Systems: Windows, Linux, MacOS</li>
-                    <li>
-System Maintenance: Active domain ,Sql server,
-server management, backups, and updates.</li>
-                    <li>
-Security: Data integrity, CCTV systems, and network
-security protocols</li>
-                    <li>HTML5, CSS3, JavaScript,python,javasript</li>
-                    <li>Bootstrap, Responsive Design</li>
-                    <li>AJAX, REST APIs</li>
-                    <li>Version Control (Git)</li>
+                    <li><strong>IT Technical Support:</strong> Enterprise-level technical support, helpdesk operations, remote assistance</li>
+                    <li><strong>Network Infrastructure:</strong> LAN/WAN installation, cabling, Wi-Fi configuration, troubleshooting</li>
+                    <li><strong>System Administration:</strong> Windows/Linux server management, backups, updates, Active Directory</li>
+                    <li><strong>Cloud Solutions:</strong> AWS, Azure deployment and management</li>
+                    <li><strong>Hardware/Software Troubleshooting:</strong> PCs, servers, printers, CCTV systems</li>
+                    <li><strong>Programming:</strong> HTML, CSS, JavaScript, Python</li>
+                    <li><strong>Tools:</strong> Cable tester, crimping tools, multimeter, diagnostic software</li>
+                    <li><strong>Operating Systems:</strong> Windows, Linux, MacOS</li>
+                    <li><strong>Security:</strong> Data integrity, CCTV systems, network security protocols, firewalls</li>
+                    <li><strong>Web Technologies:</strong> HTML5, CSS3, JavaScript, Bootstrap, Responsive Design</li>
+                    <li><strong>APIs and Integration:</strong> AJAX, REST APIs</li>
+                    <li><strong>Version Control:</strong> Git</li>
+                    <li><strong>Database Management:</strong> SQL, MySQL</li>
+                    <li><strong>Virtualization:</strong> VMware, Hyper-V</li>
                 </ul>
             `;
             showModal(content);
@@ -519,267 +1051,260 @@ security protocols</li>
 
         function showEducationPopupB(degree) {
             const content = `
-                <h3>${degree}</h3>
-                <h4>SIBA CAMPUS</h4>
-                <p><strong>Duration:</strong> 2019 - 2023</p>
-                            <img src="images/siba transcript.png" alt="Education Certificate" class="popup-image">
-                <h4>Key Achievements:</h4>
+                <h3 class="text-center">${degree}</h3>
+                <h4 class="text-center">SIBA CAMPUS</h4>
+                <p class="text-center"><strong>Duration:</strong> 2019 - 2023</p>
+                <img src="images/siba transcript.png" alt="Education Certificate" class="popup-image">
+                <h4 class="mt-4">Key Achievements:</h4>
                 <ul>
                     <li>Graduated with First Class Honours</li>
                     <li>Led team projects in web development</li>
                     <li>Completed specialized courses in modern web technologies</li>
                 </ul>
-                
-                
             `;
             showModal(content);
         }
+        
         function showEducationPopupD(degree) {
             const content = `
-                <h3>${degree}</h3>
-                <h4>SIBA CAMPUS</h4>
-                <p><strong>Duration:</strong> 2019 - 2023</p> <img src="images/IT Diploma.png" alt="Education Certificate" class="popup-image">
-                
+                <h3 class="text-center">${degree}</h3>
+                <h4 class="text-center">SIBA CAMPUS</h4>
+                <p class="text-center"><strong>Duration:</strong> 2019 - 2023</p>
+                <img src="images/IT Diploma.png" alt="Education Certificate" class="popup-image">
             `;
             showModal(content);
         }
+        
         function showEducationPopupT(degree) {
             const content = `
-                <h3>${degree}</h3>
-                <h4>Nawamaga collage</h4>
-                <p><strong>Duration:</strong> 2018</p>
-               
-                
+                <h3 class="text-center">${degree}</h3>
+                <h4 class="text-center">Nawamaga collage</h4>
+                <p class="text-center"><strong>Duration:</strong> 2018</p>
             `;
             showModal(content);
         }
+        
         function showEducationPopupE(degree) {
             const content = `
-                <h3>${degree}</h3>
-                <h4>Rapid Way English Collage</h4>
-                <p><strong>Duration:</strong> 2020</p> <img src="images/english diploma.png" alt="Education Certificate" class="popup-image">
-               
-                
-            `;
-            showModal(content);
-        }
-        function showEducationPopupT(degree) {
-            const content = `
-                <h3>${degree}</h3>
-                <h4>Higher Educational Institute Kobeigane.</h4>
-                <p><strong>Duration:</strong> 2020</p> <img src="images/tamil.png" alt="Education Certificate" class="popup-image">
-               
-                
+                <h3 class="text-center">${degree}</h3>
+                <h4 class="text-center">Rapid Way English Collage</h4>
+                <p class="text-center"><strong>Duration:</strong> 2020</p>
+                <img src="images/english diploma.png" alt="Education Certificate" class="popup-image">
             `;
             showModal(content);
         }
 
-    function showExperiencePopuptech(position) {
+        function showExperiencePopuptech(position) {
             const content = `
-                <h3>${position}</h3>
-                <h4>PT.SASL & SONS INDONESIA</h4>
-                <p><strong>Duration:</strong> 2024 - 2025</p>
-                <h4>Responsibilities:</h4>
+                <h3 class="text-center">${position}</h3>
+                <h4 class="text-center">PT.SASL & SONS INDONESIA</h4>
+                <p class="text-center"><strong>Duration:</strong> 2023 - 2025</p>
+                <h4 class="mt-4">Responsibilities:</h4>
                 <ul>
-                    <li>Installed, configured, and maintained Wi-Fi,VPN,LAN/WAN networks, ensuring optimal performance and
-connectivity</li>
+                    <li>Installed, configured, and maintained Wi-Fi,VPN,LAN/WAN networks, ensuring optimal performance and connectivity</li>
                     <li>Conducted desktop servicing, including hardware repairs, software installations, and system upgrades.</li>
                     <li>Provided technical support for computers, servers, printers, and other IT equipment, resolving issues promptly.</li>
                     <li>Monitored and maintained CCTV systems, ensuring security and functionality.</li>
                     <li>Supported project management and construction-specific software applications.</li>
                     <li>Performed routine system updates, backups, and maintenance to ensure data integrity and system reliability.</li>
+                    <li>Utilized tools such as cable testers, crimping tools, and multimeters for network cabling and troubleshooting.</li>
                 </ul>
-                <li>
-Utilized tools such as cable testers, crimping tools, and multimeters for network cabling and troubleshooting.</li>
-               
             `;
             showModal(content);
         }
+        
+        // New function for current position
+        function showExperiencePopupCurrent(position) {
+            const content = `
+                <h3 class="text-center">${position}</h3>
+                <h4 class="text-center">StarGate Building and Solutions</h4>
+                <p class="text-center"><strong>Location:</strong> Dubai, UAE</p>
+                <p class="text-center"><strong>Duration:</strong> July 2025 - Present</p>
+                <h4 class="mt-4">Key Responsibilities:</h4>
+                <ul>
+                    <li>Providing comprehensive IT technical support for enterprise clients</li>
+                    <li>Managing and maintaining network infrastructure and security systems</li>
+                    <li>Troubleshooting complex hardware and software issues</li>
+                    <li>Implementing and supporting cloud-based solutions</li>
+                    <li>Conducting system upgrades and performance optimization</li>
+                    <li>Collaborating with cross-functional teams to deliver IT solutions</li>
+                    <li>Documenting technical processes and creating user guides</li>
+                </ul>
+                <h4 class="mt-4">Technologies:</h4>
+                <ul>
+                    <li>Windows/Linux Server Administration</li>
+                    <li>Network Infrastructure (Cisco, Juniper)</li>
+                    <li>Cloud Platforms (AWS, Azure)</li>
+                    <li>Security Solutions (Firewalls, Antivirus)</li>
+                    <li>Database Management (SQL, MySQL)</li>
+                    <li>Virtualization (VMware, Hyper-V)</li>
+                </ul>
+            `;
+            showModal(content);
+        }
+        
         function showExperiencePopupapp(position) {
             const content = `
-                <h3>${position}</h3>
-                <h4>S.A SILVA & SONS LANKA (PVT)LTD</h4>
-                <p><strong>Duration:</strong> 2023 - 2024</p>
-                <h4>Responsibilities:</h4>
+                <h3 class="text-center">${position}</h3>
+                <h4 class="text-center">S.A SILVA & SONS LANKA (PVT)LTD</h4>
+                <p class="text-center"><strong>Duration:</strong> 2023</p>
+                <h4 class="mt-4">Responsibilities:</h4>
                 <ul>
-                    <li>Developed and maintained a comprehensive sales officer application including VAT amount management and automated</li>
-                    <li>
-                    oped and maintained a comprehensive sales officer application including VAT amount management and automated bill printing.</li>
+                    <li>Developed and maintained a comprehensive sales officer application including VAT amount management and automated bill printing.</li>
                     <li>Designed and implemented a new customer relationship management system to improve client communication and Integrated dynamic features using PHP and JavaScript to enhance user experience and functionality.</li>
                     <li>Created efficient SQL queries and optimized database performance for smooth data handling.</li>
                     <li>Designed responsive UI interfaces with HTML, CSS, and Bootstrap to ensure compatibility across various devices.</li>
                     <li>Developed and maintained a comprehensive sales officer application including VAT amount management and automated.</li>
-                    </ul>  
+                </ul>  
             `;
             showModal(content);
         }
 
-        function showProjectPopupcctv(project ) {
+        function showProjectPopupcctv(project) {
             const content = `
-                <h3>${project}</h3>
-                <p><strong>Role:</strong> Lead Developer</p>
-                <h4>Project Overview:Designed and implemented a robust 32-channel CCTV surveillance system for a client in Indonesia, ensuring 6 months of continuous video recording without reliance on cloud storage due to unreliable internet connectivity. The system utilized Hikvision cameras, an NVR, and a NAS drive for efficient local storage management</h4>
-                <p><h2>Key Features</h2>
-            <ul>
-                <li><strong>32 Hikvision CCTV Cameras:</strong> High-resolution cameras for comprehensive coverage.</li>
-                <li><strong>Network Video Recorder (NVR):</strong> Centralized management and recording of video feeds.</li>
-                <li><strong>NAS Drive for Storage:</strong> Local storage solution to ensure uninterrupted recording for 6 months.</li>
-                <li><strong>Offline Environment:<h2>Technical Specifications</h2>
-            <ul>
-                <li><strong>Cameras:</strong> Hikvision DS-2CD2143G0-I (4MP, IR Night Vision, Weatherproof)</li>
-                <li><strong>NVR:</strong> Hikvision DS-7608NI-I2/8P (32-channel, supports up to 8TB HDD)</li>
-                <li><strong>Storage:</strong> Synology DS920+ NAS (32TB in RAID 5 configuration)</li>
-                <li><strong>Network:</strong> PoE cameras for simplified cabling and power.</li>
-            </ul></strong> <h2>Challenges and Solutions</h2>
-            <ul>
-                <li><strong>Challenge:</strong> Unreliable internet connectivity made cloud storage impractical.<br>
-                    <strong>Solution:</strong> Implemented a NAS drive for local storage.</li>
-                <li><strong>Challenge:</strong> High storage requirements for 32 cameras over 6 months.<br>
-                    <strong>Solution:</strong> Configured RAID 5 on the NAS drive for optimal storage efficiency.</li>
-                <li><strong>Challenge:</strong> Ensuring system reliability in a remote location.<br>
-                    <strong>Solution:</strong> Used high-quality Hikvision equipment and provided detailed documentation.</li>
-            </ul>.</li>
-                <li><strong> <h2>Implementation Steps</h2>
-            <ol>
-                <li>Conducted a site survey to determine camera placement and storage requirements.</li>
-                <li>Procured Hikvision cameras, NVR, NAS drive, and networking equipment.</li>
-                <li>Installed cameras, ran PoE cables, and configured the NVR and NAS drive.</li>
-                <li>Tested the system for functionality, storage capacity, and playback quality.</li>
-                <li>Provided documentation and training to the client.</li>
-            </ol></strong> <h2>Conclusion</h2>
-            <p>This project demonstrates my ability to design and implement complex IT solutions in challenging environments. By leveraging NAS storage and high-quality Hikvision equipment, I delivered a reliable and scalable CCTV system that met the client’s requirements without relying on cloud storage.</p></li>
-            </ul>.</p>
-            `;
-            showModal(content);
-        }
-        function showProjectPopupconect(project ) {
-            const content = `
-                <h3>${project}</h3>
-                 <p><strong>Role:</strong> IT Technician (Design, Installation, and Configuration)</p>
-
-                <h4><h2>Project Overview</h2>
-            <p>Designed and implemented a secure and reliable internet connectivity solution for the company using Starlink satellite internet. Integrated Starlink with an enterprise-grade firewall to ensure robust security, network management, and seamless connectivity for all business operations.</p></h4>
-                <h2>Key Features</h2>
-            <ul>
-                <li><strong>Starlink Satellite Internet:</strong> High-speed, low-latency internet for remote locations.</li>
-                <li><strong>Enterprise Firewall:</strong> Advanced security and network management.</li>
-                <li><strong>Secure Connectivity:</strong> Encrypted connections and threat protection for all devices.</li>
-                <li><strong>Scalable Solution:</strong> Designed to support future growth and additional users.</li>
-                <li><strong>Reliability:</strong> Redundant connectivity options to minimize downtime.</li>
-            </ul>
+                <h3 class="text-center">${project}</h3>
+                <p class="text-center"><strong>Role:</strong> Lead Developer</p>
+                <h4 class="mt-4">Project Overview:</h4>
+                <p>Designed and implemented a robust 32-channel CCTV surveillance system for a client in Indonesia, ensuring 6 months of continuous video recording without reliance on cloud storage due to unreliable internet connectivity. The system utilized Hikvision cameras, an NVR, and a NAS drive for efficient local storage management.</p>
                 
-            <h2>Technical Specifications</h2>
-            <ul>
-                <li><strong>Starlink Setup:</strong> Dish and Router (Up to 220 Mbps, 20-40 ms latency).</li>
-                <li><strong>Firewall:</strong> Fortinet FortiGate 60E (VPN, intrusion prevention, web filtering).</li>
-                <li><strong>Network Configuration:</strong> LAN, VPN, and QoS for prioritized traffic.</li>
-            </ul>
-               <h2>Challenges and Solutions</h2>
-            <ul>
-                <li><strong>Challenge:</strong> Ensuring secure connectivity in a remote location.<br>
-                    <strong>Solution:</strong> Integrated Starlink with an enterprise firewall.</li>
-                <li><strong>Challenge:</strong> Managing network performance for multiple users.<br>
-                    <strong>Solution:</strong> Configured QoS for optimal performance.</li>
-            </ul>
-                <li><strong>  <h2>Implementation Steps</h2>
-            <ol>
-                <li>Conducted a site assessment to evaluate internet needs.</li>
-                <li>Procured Starlink hardware and Fortinet firewall.</li>
-                <li>Installed and configured Starlink and firewall.</li>
-                <li>Tested internet speed, latency, and firewall functionality.</li>
-                <li>Provided training and documentation to staff.</li>
-            </ol>
-            <h2>Conclusion</h2>
-            <p>This project highlights my ability to implement cutting-edge technology solutions to solve real-world business challenges. By integrating Starlink with an enterprise firewall, I provided the company with secure, reliable, and high-performance internet connectivity, enabling seamless business operations.</p>
-            
+                <h4 class="mt-4">Key Features</h4>
+                <ul>
+                    <li><strong>32 Hikvision CCTV Cameras:</strong> High-resolution cameras for comprehensive coverage.</li>
+                    <li><strong>Network Video Recorder (NVR):</strong> Centralized management and recording of video feeds.</li>
+                    <li><strong>NAS Drive for Storage:</strong> Local storage solution to ensure uninterrupted recording for 6 months.</li>
+                </ul>
+                
+                <h4 class="mt-4">Technical Specifications</h4>
+                <ul>
+                    <li><strong>Cameras:</strong> Hikvision DS-2CD2143G0-I (4MP, IR Night Vision, Weatherproof)</li>
+                    <li><strong>NVR:</strong> Hikvision DS-7608NI-I2/8P (32-channel, supports up to 8TB HDD)</li>
+                    <li><strong>Storage:</strong> Synology DS920+ NAS (32TB in RAID 5 configuration)</li>
+                    <li><strong>Network:</strong> PoE cameras for simplified cabling and power.</li>
+                </ul>
+                
+                <h4 class="mt-4">Implementation Steps</h4>
+                <ol>
+                    <li>Conducted a site survey to determine camera placement and storage requirements.</li>
+                    <li>Procured Hikvision cameras, NVR, NAS drive, and networking equipment.</li>
+                    <li>Installed cameras, ran PoE cables, and configured the NVR and NAS drive.</li>
+                    <li>Tested the system for functionality, storage capacity, and playback quality.</li>
+                    <li>Provided documentation and training to the client.</li>
+                </ol>
+            `;
+            showModal(content);
+        }
+        
+        function showProjectPopupconect(project) {
+            const content = `
+                <h3 class="text-center">${project}</h3>
+                <p class="text-center"><strong>Role:</strong> IT Technician (Design, Installation, and Configuration)</p>
+
+                <h4 class="mt-4">Project Overview</h4>
+                <p>Designed and implemented a secure and reliable internet connectivity solution for the company using Starlink satellite internet. Integrated Starlink with an enterprise-grade firewall to ensure robust security, network management, and seamless connectivity for all business operations.</p>
+                
+                <h4 class="mt-4">Key Features</h4>
+                <ul>
+                    <li><strong>Starlink Satellite Internet:</strong> High-speed, low-latency internet for remote locations.</li>
+                    <li><strong>Enterprise Firewall:</strong> Advanced security and network management.</li>
+                    <li><strong>Secure Connectivity:</strong> Encrypted connections and threat protection for all devices.</li>
+                    <li><strong>Scalable Solution:</strong> Designed to support future growth and additional users.</li>
+                    <li><strong>Reliability:</strong> Redundant connectivity options to minimize downtime.</li>
+                </ul>
+                
+                <h4 class="mt-4">Technical Specifications</h4>
+                <ul>
+                    <li><strong>Starlink Setup:</strong> Dish and Router (Up to 220 Mbps, 20-40 ms latency).</li>
+                    <li><strong>Firewall:</strong> Fortinet FortiGate 60E (VPN, intrusion prevention, web filtering).</li>
+                    <li><strong>Network Configuration:</strong> LAN, VPN, and QoS for prioritized traffic.</li>
+                </ul>
+                
+                <h4 class="mt-4">Implementation Steps</h4>
+                <ol>
+                    <li>Conducted a site assessment to evaluate internet needs.</li>
+                    <li>Procured Starlink hardware and Fortinet firewall.</li>
+                    <li>Installed and configured Starlink and firewall.</li>
+                    <li>Tested internet speed, latency, and firewall functionality.</li>
+                    <li>Provided training and documentation to staff.</li>
+                </ol>
+            `;
+            showModal(content);
+        }
+        
+        function showProjectPopupPHP(project) {
+            const content = `
+                <h3 class="text-center">${project}</h3>
+                <p class="text-center"><strong>Role:</strong> Lead Developer</p>
+                
+                <h4 class="mt-4">Project Overview</h4>
+                <p>Developed a comprehensive sales officer billing system for efficient management of sales transactions, VAT calculations, and automated bill printing. The system streamlined the billing process and improved accuracy in financial transactions.</p>
+                
+                <h4 class="mt-4">Key Features</h4>
+                <ul>
+                    <li><strong>Automated Billing:</strong> Automated calculation of VAT and total amounts.</li>
+                    <li><strong>Bill Printing:</strong> Integrated printing functionality for instant bill generation.</li>
+                    <li><strong>User Management:</strong> Role-based access control for different user types.</li>
+                    <li><strong>Reporting:</strong> Sales reports and transaction history.</li>
+                </ul>
+                
+                <h4 class="mt-4">Technologies Used</h4>
+                <ul>
+                    <li>PHP for backend development</li>
+                    <li>MySQL for database management</li>
+                    <li>HTML, CSS, JavaScript for frontend</li>
+                    <li>Bootstrap for responsive design</li>
+                </ul>
             `;
             showModal(content);
         }
 
-        // Form submission with popup confirmation
+        // Form submission with email functionality
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:udanaindrajith2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}
+Email: ${email}
+
+Message:
+${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message in modal
             const content = `
-                <h3>Thank You!</h3>
-                <p>Your message has been sent successfully. I will get back to you soon!</p>
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h3>Thank You!</h3>
+                    <p>Your message has been prepared for sending. Your email client should open shortly with the message pre-filled.</p>
+                    <p>If your email client doesn't open, please email <a href="mailto:udanaindrajith2@gmail.com">udanaindrajith2@gmail.com</a> directly.</p>
+                </div>
             `;
             showModal(content);
             this.reset();
         });
 
-        // Smooth scrolling (same as before)
-        document.querySelectorAll('a[href^="udanaindrajith2@gmail.com"]').forEach(anchor => {
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    };
-
-    // Show loading state
-    const submitButton = this.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.innerHTML = 'Sending...';
-
-    // Send email using EmailJS or your preferred email service
-    // This is an example using the fetch API
-    fetch('your-email-endpoint', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Show success message
-        document.getElementById('successMessage').style.display = 'block';
-        document.getElementById('errorMessage').style.display = 'none';
-        
-        // Reset form
-        this.reset();
-    })
-    .catch(error => {
-        // Show error message
-        document.getElementById('errorMessage').style.display = 'block';
-        document.getElementById('successMessage').style.display = 'none';
-    })
-    .finally(() => {
-        // Reset button state
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Send Message';
-        
-        // Hide messages after 5 seconds
-        setTimeout(() => {
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'none';
-        }, 5000);
-    });
-});
-
-// Optional: Add animation when revealing social icons
-document.addEventListener('DOMContentLoaded', function() {
-    const icons = document.querySelectorAll('.social-icon');
-    icons.forEach((icon, index) => {
-        icon.style.opacity = '0';
-        icon.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            icon.style.transition = 'all 0.3s ease';
-            icon.style.opacity = '1';
-            icon.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-});
     </script>
 </body>
 </html>
